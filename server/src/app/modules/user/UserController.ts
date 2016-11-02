@@ -65,8 +65,8 @@ class UserController implements BaseController {
   delete = (req: express.Request, res: express.Response)=> {
     try {
       var _id = req.params.id;
-      this._userService.delete(_id,(err,result)=>{
-        if(err)
+      this._userService.delete(_id, (err, result)=> {
+        if (err)
           res.json(err);
         res.json(result);
       })
