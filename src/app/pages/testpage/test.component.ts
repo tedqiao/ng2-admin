@@ -1,10 +1,19 @@
-import {Component} from '@angular/core';
-
+import {Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import './test.loader';
 @Component({
-  selector:'test',
-  template:require('./test.html')
+  selector: 'test',
+  template: require('./test.html'),
+  styles:[require('./test.scss')]
 })
+export class Test implements AfterViewInit {
 
-export class Test{
+
+  constructor() {
+  }
+
+  ngAfterViewInit() {
+
+  }
+
 
 }

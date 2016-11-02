@@ -1,5 +1,6 @@
 import { Routes, RouterModule }  from '@angular/router';
 import { Pages } from './pages.component';
+import {AuthGuard} from "../_guard/auth.guard";
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
       { path: 'forms', loadChildren: () => System.import('./forms/forms.module') },
       { path: 'tables', loadChildren: () => System.import('./tables/tables.module') },
       { path: 'maps', loadChildren: () => System.import('./maps/maps.module') },
-      { path: 'test', loadChildren: () => System.import('./testpage/test.module') }
+      { path: 'test', loadChildren: () => System.import('./testpage/test.module'),canActivate:[AuthGuard] }
     ]
   }
 ];

@@ -316,6 +316,17 @@ export const PAGES_MENU = [
             target: '_blank'
           }
         }
+      },
+      {
+        path: 'test',
+        data: {
+          menu: {
+            title: 'test',
+            icon: 'ion-android-exit',
+            order: 0,
+            target: '_blank'
+          }
+        }
       }
     ]
   }

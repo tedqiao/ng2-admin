@@ -1,0 +1,32 @@
+<div #tripItem class="feed-messages-container">
+  <div class="feed-message" *ngFor="let item of trip" (click)="expandMessage(item)">
+    <div class="message-icon" *ngIf="item.type == 'text-message'">
+      <img class="photo-icon" src="{{ ( item.author | baProfilePicture ) }}">
+    </div>
+    <div class="message-icon" *ngIf="item.type != 'text-message'">
+      <img class="photo-icon" src="{{ ( item.author | baProfilePicture ) }}">
+      <span class="sub-photo-icon" [ngClass]="item.type"></span>
+    </div>
+    <div class="text-block text-message">
+      <div class="message-header">
+        <span class="author">{{ item.author }} {{ item.surname}}</span>
+      </div>
+      <div class="message-content line-clamp" [ngClass]="{'line-clamp-2' : !item.expanded}">
+        <span *ngIf="item.preview">{{ item.header }} </span>{{ item.text }}
+      </div>
+      <div class="preview" [ngClass]="{'hidden': !item.expanded}" *ngIf="item.preview">
+        <a href="{{ item.link }}" target="_blank">
+          <img src="{{ ( item.preview | baAppPicture )}}">
+        </a>
+      </div>
+      <div [ngClass]="{'hidden': !item.expanded}" class="message-time">
+        <div class="post-time">
+          {{ item.time }}
+        </div>
+        <div class="ago-time">
+          {{ item.ago }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
