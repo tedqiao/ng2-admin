@@ -1,19 +1,19 @@
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import * as routers from './config/routes/Routes';
-import * as path from 'path';
-import * as mongoose from 'mongoose';
-import * as morgan from 'morgan';
-
+import express = require("express");
+import bodyParser = require ("body-parser");
+import routers = require('./config/routes/Routes');
+import path = require('path');
+import mongoose = require('mongoose');
+import morgan = require('morgan');
+import oauth2 = require('./app/modules/auth2/oauth2');
+import passport = require('passport');
 
 import {Config} from './config/envirment/config';
 
 
 var app = express();
-//noinspection TypeScriptValidateTypes
-app.use(morgan('dev'));
 
-mongoose.connect(Config.current.mongoConnectionString,()=>{
+
+mongoose.connect(Config.current.mongoConnectionString, ()=> {
 
 });
 app.set('port', Config.current.port);
@@ -30,7 +30,18 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 //noinspection TypeScriptValidateTypes
-app.use('/api', routers);
+app.use(morgan('dev'));
+
+
+require('./app/modules/auth2/oauth2.passport');
+//noinspection TypeScriptValidateTypes
+app.use(passport.initialize());
+
+//noinspection TypeScriptValidateTypes
+app.post('/oauth/token', oauth2);
+
+//noinspection TypeScriptValidateTypes
+app.use('/api', passport.authenticate('bearer', {session: false}), routers);
 
 var renderIndex = (req: express.Request, res: express.Response) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));

@@ -1,6 +1,6 @@
 import express = require("express");
-import UserService = require("./UserService");
-import UserController = require("./UserController");
+import UserService = require("./user.service");
+import UserController = require("./user.controller");
 
 var router = express.Router();
 

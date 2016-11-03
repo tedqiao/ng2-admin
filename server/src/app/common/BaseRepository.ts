@@ -38,7 +38,8 @@ class BaseRepository<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
 
     private toObjectId (_id: string) : mongoose.Types.ObjectId {
-        return mongoose.Types.ObjectId.createFromHexString(_id)
+        //noinspection TypeScriptUnresolvedFunction
+      return mongoose.Types.ObjectId.createFromHexString(_id)
     }
 
 }

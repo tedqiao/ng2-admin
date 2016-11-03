@@ -1,5 +1,5 @@
 import BaseRepository = require("../../common/BaseRepository");
-import User = require("./UserSchema");
+import User = require("./user.schema");
 import {IUser} from "../../model/interfaces/IUser";
 
 

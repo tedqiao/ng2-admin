@@ -1,6 +1,6 @@
 import BaseService = require("../../common/BaseService");
 import {IUser} from "../../model/interfaces/IUser";
-import UserRepository = require("./UserRepository");
+import UserRepository = require("./user.repository");
 
 
 class UserService implements BaseService<IUser> {

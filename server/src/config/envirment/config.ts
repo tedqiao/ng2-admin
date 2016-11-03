@@ -18,6 +18,7 @@ export class Config {
     },
     port: process.env.PORT || 3000,
     mongoConnectionString: 'mongodb://localhost/db',
+    tokenLife:100
   };
   static production= {
     app: {
@@ -25,6 +26,7 @@ export class Config {
     },
     port: process.env.PORT || 3000,
     mongoConnectionString: process.env.CUSTOMCONNSTR_MONGODB,
+    tokenLife:3600
 
   }
   static current:IConfigEnv = Config[Config.env];

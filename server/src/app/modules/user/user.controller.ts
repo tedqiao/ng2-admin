@@ -1,5 +1,5 @@
 import {BaseController} from "../../common/BaseController";
-import UserService = require("./UserService");
+import UserService = require("./user.service");
 import express = require('express');
 import {IUser} from "../../model/interfaces/IUser";
 

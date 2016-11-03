@@ -59,7 +59,7 @@ class UserSchema {
   }
 }
 
-var User = mongoose.model<IUser>('User', UserSchema.schema);
+var User = mongoose.model<IUser>('UserSchema', UserSchema.schema);
 
 export = User;
 
