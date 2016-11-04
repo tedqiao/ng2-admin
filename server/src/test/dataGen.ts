@@ -1,9 +1,9 @@
 import  Log = require('log');
 import  mongoose = require('mongoose');
-import  UserModel = require('../app/modules/auth2/oauth2.schema.User');
-import  ClientModel = require('../app/modules/auth2/oauth2.schema.Client');
-import  AccessTokenModel = require('../app/modules/auth2/oauth2.schema.AccessToken');
-import  RefreshTokenModel = require('../app/modules/auth2/oauth2.schema.RefreshToken');
+import  UserModel = require('../app/modules/oauth2/oauth2.schema.User');
+import  ClientModel = require('../app/modules/oauth2/oauth2.schema.Client');
+import  AccessTokenModel = require('../app/modules/oauth2/oauth2.schema.AccessToken');
+import  RefreshTokenModel = require('../app/modules/oauth2/oauth2.schema.RefreshToken');
 import  faker               = require('faker');
 import {Config} from './../config/envirment/config';
 var log = new Log('info');

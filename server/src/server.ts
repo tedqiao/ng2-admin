@@ -4,7 +4,7 @@ import routers = require('./config/routes/Routes');
 import path = require('path');
 import mongoose = require('mongoose');
 import morgan = require('morgan');
-import oauth2 = require('./app/modules/auth2/oauth2');
+import oauth2 = require('./app/modules/oauth2/oauth2');
 import passport = require('passport');
 
 import {Config} from './config/envirment/config';
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({
 app.use(morgan('dev'));
 
 
-require('./app/modules/auth2/oauth2.passport');
+require('./app/modules/oauth2/oauth2.passport');
 //noinspection TypeScriptValidateTypes
 app.use(passport.initialize());
 
