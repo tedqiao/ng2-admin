@@ -25,7 +25,7 @@ export class Config {
       database: "ng-admin",
       host: "127.0.0.1",
       dialect: "mysql",
-      logging:false
+      logging: true
     },
     tokenLife: 100
   };
@@ -41,7 +41,7 @@ export class Config {
       database: "ng-admin",
       host: "127.0.0.1",
       dialect: "mysql",
-      logging:true
+      logging: false
     },
     tokenLife: 3600
   };

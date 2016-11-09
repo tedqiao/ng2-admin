@@ -67,3 +67,4 @@ npm-debug.log
 /server/**/*.js
 /server/**/*.map
 /server/**/*.d.ts
+!server/index.d.ts

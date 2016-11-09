@@ -106,8 +106,7 @@ server.exchange(oauth2orize.exchange.password(function (client, username, passwo
 //     done(null, tokenValue, refreshTokenValue, {'expires_in': Config.current.tokenLife});
 //   });
 // });
-}))
-;
+}));
 
 // Exchange refreshToken for an access token.
 server.exchange(oauth2orize.exchange.refreshToken(function (client, refreshToken, scope, done) {

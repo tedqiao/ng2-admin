@@ -1,3 +1,4 @@
+/// <reference path="./../index.d.ts"/>
 import * as http from 'http';
 import app from './app/app';
 import db from './app/model/mysqlmodels';
