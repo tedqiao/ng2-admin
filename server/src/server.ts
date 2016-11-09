@@ -1,83 +1,29 @@
-import express = require("express");
-import bodyParser = require ("body-parser");
-import routers = require('./config/routes/Routes');
-import path = require('path');
-import mongoose = require('mongoose');
-import morgan = require('morgan');
-import oauth2 = require('./app/modules/oauth2/oauth2');
-import passport = require('passport');
-
-import {Config} from './config/envirment/config';
-
-
-var app = express();
-
-
-mongoose.connect(Config.current.mongoConnectionString, ()=> {
-
-});
-app.set('port', Config.current.port);
-
+import * as http from 'http';
+import app from './app/app';
+import db from './app/model/mysqlmodels';
 
 //noinspection TypeScriptValidateTypes
-app.use(express.static(path.resolve(__dirname, '../client')));
-//noinspection TypeScriptValidateTypes
-app.use(express.static(path.resolve(__dirname, '../../node_modules')));
-//noinspection TypeScriptValidateTypes
-app.use(bodyParser.json());
-//noinspection TypeScriptValidateTypes
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-//noinspection TypeScriptValidateTypes
-app.use(morgan('dev'));
+var port = app.get('port');
+var BootstrapApp = function () {
+  var server = http.createServer(app);
 
-
-require('./app/modules/oauth2/oauth2.passport');
-//noinspection TypeScriptValidateTypes
-app.use(passport.initialize());
-
-//noinspection TypeScriptValidateTypes
-app.post('/oauth/token', oauth2);
-
-//noinspection TypeScriptValidateTypes
-app.use('/api', passport.authenticate('bearer', {session: false}), routers);
-
-var renderIndex = (req: express.Request, res: express.Response) => {
-  res.sendFile(path.resolve(__dirname, '../client/index.html'));
-}
-
-//noinspection TypeScriptValidateTypes
-app.get('/*', renderIndex);
-
-if (Config.env === 'development') {
-  //noinspection TypeScriptValidateTypes
-  app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
-    res.status(err.status || 500);
-    res.json({
-      error: err,
-      message: err.message
-    });
+  server.listen(port, function () {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('Server is listening on port:' + port);
   });
 }
 
+db.sequelize.sync({force: true}).then(()=> {
+  BootstrapApp();
+}).then(()=> {
+  db.User.create({username: "andrey", email: "andry@gmil.com", password: "simplepassword"});
+  db.Oauth2Client.create({name:"mobile",clientId:"mobileV1",clientSecret:"abc123456"});
+})
+  .catch((err)=> {
+    console.log(err);
+  })
 
-// catch 404 and forward to error handler
-//noinspection TypeScriptValidateTypes
-app.use(function (req: express.Request, res: express.Response, next: any) {
-  let err = new Error("Not Found");
-  next(err);
-});
 
-// production error handler
-// no stacktrace leaked to user
-//noinspection TypeScriptValidateTypes
-app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
-  res.status(err.status || 500);
-  res.json({
-    error: {},
-    message: err.message
-  });
-});
 
-export {app}
+

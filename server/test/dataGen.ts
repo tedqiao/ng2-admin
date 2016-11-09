@@ -1,11 +1,11 @@
 import  Log = require('log');
 import  mongoose = require('mongoose');
-import  UserModel = require('../app/modules/oauth2/oauth2.schema.User');
-import  ClientModel = require('../app/modules/oauth2/oauth2.schema.Client');
-import  AccessTokenModel = require('../app/modules/oauth2/oauth2.schema.AccessToken');
-import  RefreshTokenModel = require('../app/modules/oauth2/oauth2.schema.RefreshToken');
+import  UserModel = require('./../src/app/model/schema/User');
+import  ClientModel = require('./../src/app/modules/oauth2/oauth2.schema.Client');
+import  AccessTokenModel = require('./../src/app/modules/oauth2/oauth2.schema.AccessToken');
+import  RefreshTokenModel = require('./../src/app/modules/oauth2/oauth2.schema.RefreshToken');
 import  faker               = require('faker');
-import {Config} from './../config/envirment/config';
+import {Config} from '../src/app/config/envirment/config';
 var log = new Log('info');
 
 mongoose.connect(Config.current.mongoConnectionString, ()=> {
@@ -13,17 +13,19 @@ mongoose.connect(Config.current.mongoConnectionString, ()=> {
 });
 
 UserModel.remove({}, function (err) {
-  var user = new UserModel({username: "andrey", password: "simplepassword"});
+  var user = new UserModel({username: "andrey", password: "simplepassword",email:"andrey@gmail.com"});
   user.save(function (err, user) {
     if (err) return log.error(err);
     else log.info("New user - %s", user);
   });
 
   for (var i = 0; i < 4; i++) {
-    var user = new UserModel({username: faker.name.findName().toLowerCase(), password: faker.lorem.words(1)[0]});
+    var user = new UserModel({username: faker.name.findName().toLowerCase(), password: faker.lorem.words(1),email:faker.lorem.words(1)+"@gmail.com"});
     user.save(function (err, user) {
       if (err) return log.error(err);
-      else log.info("New user - %s", user);
+      else { //noinspection TypeScriptUnresolvedVariable
+        log.info("New user - %s %s", user.username,user.password);
+      }
     });
   }
 });

@@ -30,6 +30,14 @@ class UserService implements BaseService<IUser> {
     this._userRepo.delete(_id, callback);
   };
 
+  findByUsername(username:string,callback:(error: any, result: any)=>void){
+    this._userRepo.findByField("username",username,callback);
+  }
+
+  findByEmail(email:string,callback:(error: any, result: any)=>void){
+    this._userRepo.findByField("email",email,callback);
+  }
+
 }
 
 Object.seal(UserService);

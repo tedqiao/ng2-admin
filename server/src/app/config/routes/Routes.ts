@@ -1,6 +1,6 @@
 import express = require('express');
 import poiRouter = require('./poiRouters');
-import userRouter = require("../../app/modules/user/routing");
+import userRouter = require("./../../modules/user/routing");
 
 var router = express.Router();
 

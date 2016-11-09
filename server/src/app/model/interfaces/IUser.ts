@@ -1,5 +1,6 @@
 import mongoose = require("mongoose");
 export interface IUser extends mongoose.Document {
-  name: string;
+  username: string;
   password: string;
+  email:string
 }

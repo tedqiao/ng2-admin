@@ -35,10 +35,10 @@ gulp.task('build:server', function () {
 /**
  * Copy bin directory for www
  */
-gulp.task("serverResources", function () {
-  return gulp.src(["server/src/bin/**"])
-    .pipe(gulp.dest("dist/server/bin"));
-});
+// gulp.task("serverResources", function () {
+//   return gulp.src(["server/src/bin/**"])
+//     .pipe(gulp.dest("dist/server/bin"));
+// });
 
 
 gulp.task("ENV", function () {
@@ -58,9 +58,9 @@ gulp.task("ENV", function () {
  */
 
 gulp.task("build", function (callback) {
-  runSequence('build:server', 'serverResources', 'ENV', callback);
+  runSequence('clean','build:server', 'ENV', callback);
 });
 
 gulp.task('default', function (callback) {
-  runSequence('clean','build:server', 'serverResources', 'ENV', callback);
+  runSequence('clean','build:server', 'ENV', callback);
 });

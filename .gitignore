@@ -34,6 +34,7 @@ Thumbs.db
 /node_modules
 /bower_components
 npm-debug.log
+/mocha-ts-use
 
 # Coverage #
 /coverage/
@@ -61,3 +62,8 @@ npm-debug.log
 # IDE #
 .idea/
 *.swp
+
+#server js map d.ts#
+/server/**/*.js
+/server/**/*.map
+/server/**/*.d.ts
