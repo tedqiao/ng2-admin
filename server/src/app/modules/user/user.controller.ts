@@ -1,80 +1,55 @@
-import {BaseController} from "../../common/BaseController";
-import UserService = require("./user.service");
-import express = require('express');
-import {IUser} from "../../model/interfaces/IUser";
+import {UserService} from "./user.service";
+import * as express from'express';
+import {UserAttributes} from "../../model/mysqlmodels/User";
 
 
-class UserController implements BaseController {
+export class UserController {
   private _userService: UserService
 
   constructor() {
     this._userService = new UserService();
   }
 
-  retrieve = (req: express.Request, res: express.Response)=> {
-    try {
-      this._userService.retrieve((err, result)=> {
-        if (err) {
-          res.json({error: err});
-        }
-        res.json(result);
+  retrieve = (req: express.Request, res: express.Response, next: express.NextFunction)=> {
+    this._userService.retrieve()
+      .subscribe((data)=> {
+        res.json(data);
+      }, (err)=> {
+        next(err);
       });
-    } catch (err) {
-      console.log(err);
-    }
+  }
+
+  findById: express.RequestHandler = (req: express.Request, res: express.Response, next: express.NextFunction)=> {
+    this._userService.findById(req.authInfo.userId)
+      .subscribe((data)=> {
+        res.json(data);
+      }, (err)=> {
+        next(err);
+      })
   };
 
-  findById = (req: express.Request, res: express.Response)=> {
-    try {
-      this._userService.findById(req.params.id, (err, result)=> {
-        res.json(result);
-      })
-    } catch (err) {
-      console.log(err);
-    }
+  create = (req: express.Request, res: express.Response, next: express.NextFunction)=> {
+    console.log(req.body);
+    this._userService.create(<UserAttributes>req.body)
+      .subscribe((data)=> {
+        res.json(data);
+      }, (err)=> {
+        next(err);
+      });
   };
 
-  create = (req: express.Request, res: express.Response)=> {
-    try {
-      var user: IUser = <IUser>req.body;
-      this._userService.create(user, (err, result)=> {
-        if (err) {
-          res.json({error: err});
-        }
-        res.json(result);
-      })
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  update = (req: express.Request, res: express.Response)=> {
-    try {
-      var id = req.params.id;
-      var user = <IUser>req.body;
-      this._userService.update(id, user, (err, result)=> {
-        if (err)
-          res.json({error: err});
-        res.json(result);
-      })
-    } catch (err) {
-      console.log(err);
-    }
+  update = (req: express.Request, res: express.Response, next: express.NextFunction)=> {
+    this._userService.update(req.params.id, req.body)
+      .subscribe(()=> {
+          res.json({status:"ok"});
+      }, (err)=> {
+        next(err);
+      });
   };
 
   delete = (req: express.Request, res: express.Response)=> {
-    try {
-      var _id = req.params.id;
-      this._userService.delete(_id, (err, result)=> {
-        if (err)
-          res.json(err);
-        res.json(result);
-      })
-    } catch (err) {
-      console.log(err);
-    }
+    //do not need delete;
   };
 
 }
 
-export = UserController;

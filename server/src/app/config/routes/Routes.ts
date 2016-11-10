@@ -1,6 +1,6 @@
 import express = require('express');
 import poiRouter = require('./poiRouters');
-import userRouter = require("./../../modules/user/routing");
+import {UserRouter} from "./../../modules/user/routing";
 
 var router = express.Router();
 
@@ -8,6 +8,6 @@ var router = express.Router();
 //noinspection TypeScriptValidateTypes
 router.use("/poi", poiRouter.Routers);
 //noinspection TypeScriptValidateTypes
-router.use("/user",userRouter.Routers);
+router.use("/user",new UserRouter().Routers);
 
 export = router;

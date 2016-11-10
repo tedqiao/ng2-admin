@@ -44,11 +44,7 @@ app.post('/oauth/token', oauth2);
 // custom callback
 
 //noinspection TypeScriptValidateTypes
-app.use('/api',
-  passport.authenticate('bearer', {session: false}),
-  function (req, res, next) {
-    next();
-  }, routers);
+app.use('/api', routers);
 
 var renderIndex = (req: express.Request, res: express.Response) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
@@ -62,7 +58,7 @@ if (Config.env === 'development') {
   app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
     res.status(err.status || 500);
     res.json({
-      error: err,
+      error: err.name,
       message: err.message
     });
   });
@@ -82,7 +78,7 @@ app.use(function (req: express.Request, res: express.Response, next: any) {
 app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
   res.status(err.status || 500);
   res.json({
-    error: {},
+    error: err.name,
     message: err.message
   });
 });

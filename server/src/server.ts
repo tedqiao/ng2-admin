@@ -19,7 +19,10 @@ db.sequelize.sync({force: true}).then(()=> {
   BootstrapApp();
 }).then(()=> {
   db.User.create({username: "andrey", email: "andry@gmil.com", password: "simplepassword"});
-  db.Oauth2Client.create({name:"mobile",clientId:"mobileV1",clientSecret:"abc123456"});
+  db.User.create({username: "andrey2", email: "andry2@gmil.com", password: "simplepassword"});
+  db.User.create({username: "andrey3", email: "andry3@gmil.com", password: "simplepassword"});
+
+  db.Oauth2Client.create({name: "mobile", clientId: "mobileV1", clientSecret: "abc123456"});
 })
   .catch((err)=> {
     console.log(err);

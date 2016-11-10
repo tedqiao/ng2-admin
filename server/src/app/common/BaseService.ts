@@ -1,7 +1,12 @@
-import Read = require("./interface/Read");
-import Write = require("./interface/Write");
+import {default as DB} from './../model/mysqlmodels/index';
 
-interface BaseService<T> extends Read<T>,Write<T> {
+export class BaseService{
+
+  public db;
+
+  constructor() {
+    this.db = DB;
+  }
+
 }
 
-export = BaseService;

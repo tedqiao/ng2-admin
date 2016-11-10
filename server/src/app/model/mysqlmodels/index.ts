@@ -1,4 +1,4 @@
-// ES6-style imports
+
 import * as fs from 'fs';
 import * as path from 'path';
 import * as Sequelize from 'sequelize';
@@ -37,6 +37,7 @@ var basename = path.basename(module.filename);
 fs
   .readdirSync(__dirname)
   .filter(function (file) {
+    console.log("load:"+file);
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(function (file) {

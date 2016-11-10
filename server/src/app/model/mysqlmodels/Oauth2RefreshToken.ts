@@ -28,7 +28,8 @@ export default function defineOauth2RefreshAccessToken(sequelize: Sequelize.Sequ
       primaryKey:true
     },
     token: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull:false
     }
   },{
     tableName:"oauth2_refresh_token"

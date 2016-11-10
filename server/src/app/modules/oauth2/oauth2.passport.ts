@@ -35,7 +35,6 @@ passport.use(new ClientPasswordStrategy(
     //   return done(null, client);
     // });
 
-
   }
 ));
 
@@ -80,7 +79,6 @@ passport.use(new
         if (err.name === 'token') {
           return;
         }
-
         return done(err);
       });
 

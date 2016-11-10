@@ -1,5 +1,4 @@
-import express = require('express');
-import BaseService = require("./BaseService");
+import * as express from 'express';
 
 export interface BaseController {
   retrieve: express.RequestHandler;

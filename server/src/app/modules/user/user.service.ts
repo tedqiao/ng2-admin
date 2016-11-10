@@ -1,44 +1,82 @@
-import BaseService = require("../../common/BaseService");
-import {IUser} from "../../model/interfaces/IUser";
-import UserRepository = require("./user.repository");
+import  {BaseService} from "../../common/BaseService";
+import {Observable} from "rxjs";
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import {UserNotFoundException} from "../../common/Exceptions/UserNotFound";
+import {UserAttributes} from "../../model/mysqlmodels/User";
 
 
-class UserService implements BaseService<IUser> {
-  private _userRepo: UserRepository;
+export class UserService extends BaseService {
 
   constructor() {
-    this._userRepo = new UserRepository();
+    super();
+
   }
 
-  retrieve(callback: (error: any, result: IUser)=>void) {
-    this._userRepo.retrieve(callback);
+  retrieve(): Observable<Object> {
+    return Observable.fromPromise(this.db.User.findAll())
+      .map((data)=> {
+        if (!data)
+          throw new UserNotFoundException();
+        else
+          return data;
+      });
   };
 
-  findById(_id: string, callback: (error: any, result: IUser)=>void) {
-    this._userRepo.findById(_id, callback);
+  findById(_id: string): Observable<Object> {
+    return Observable.fromPromise(this.db.User.findById(parseInt(_id, 10), {attributes: ['userId', 'username', 'email',]}))
+      .map((data)=> {
+        if (!data)
+          throw new UserNotFoundException();
+        else
+          return data;
+      });
   };
 
-  create(user: IUser, callback: (error: any, result: any)=>void) {
-    this._userRepo.create(user, callback);
+  create(user: UserAttributes): Observable<Object> {
+    return Observable.fromPromise(this.db.User.create(user))
+      .map((user)=> {
+        return user;
+      });
+
   };
 
-  update(_id: string, user: IUser, callback: (error: any, result: any)=>void) {
-    this._userRepo.update(_id, user, callback);
+  update(_id: string, query: Object): Observable<Object> {
+
+    return Observable.fromPromise(this.db.User.update(query, {where: {userId: parseInt(_id, 10)}}))
+      .map((data)=> {
+        if (data[0] === 0)
+          throw new UserNotFoundException();
+        else
+          return data;
+      });
   };
 
   delete(_id: string, callback: (error: any, result: any)=>void) {
-    this._userRepo.delete(_id, callback);
+
   };
 
-  findByUsername(username:string,callback:(error: any, result: any)=>void){
-    this._userRepo.findByField("username",username,callback);
+  findByUsername(username: string) {
+    return Observable.fromPromise(this.db.User.find({where: {username: username}}))
+      .map((data)=> {
+        if (!data)
+          throw new UserNotFoundException();
+        else
+          return data;
+      });
   }
 
-  findByEmail(email:string,callback:(error: any, result: any)=>void){
-    this._userRepo.findByField("email",email,callback);
+  findByEmail(email: string) {
+    return Observable.fromPromise(this.db.User.find({where: {email: email}}))
+      .map((data)=> {
+        if (!data)
+          throw new UserNotFoundException();
+        else
+          return data;
+      });
   }
 
 }
 
-Object.seal(UserService);
-export = UserService;
+
