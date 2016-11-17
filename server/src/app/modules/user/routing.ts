@@ -5,7 +5,7 @@ import {UserController} from "./user.controller";
 
 var router = express.Router();
 
-export class UserRouter {
+class UserRouter {
   private _userController: UserController
 
   constructor() {
@@ -29,3 +29,4 @@ export class UserRouter {
 
 }
 
+export default new UserRouter();

@@ -21,18 +21,18 @@ export default function defineOauth2RefreshAccessToken(sequelize: Sequelize.Sequ
   var AccessToken = sequelize.define<Oauth2RefreshTokenInstance,Oauth2RefreshTokenAttributes>('Oauth2RefreshToken', {
     userId: {
       type: DataTypes.INTEGER,
-      primaryKey:true
+      primaryKey: true
     },
     clientId: {
       type: DataTypes.STRING,
-      primaryKey:true
+      primaryKey: true
     },
     token: {
       type: DataTypes.STRING,
-      allowNull:false
+      allowNull: false
     }
-  },{
-    tableName:"oauth2_refresh_token"
+  }, {
+    tableName: "oauth2_refresh_token"
   });
 
   return AccessToken;

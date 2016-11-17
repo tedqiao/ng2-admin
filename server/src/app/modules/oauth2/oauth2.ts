@@ -61,7 +61,9 @@ server.exchange(oauth2orize.exchange.password(function (client, username, passwo
         });
     })
     .then(()=> {
-      return done(null, tokenValue, refreshTokenValue, {'expires_in': Config.current.tokenLife});
+      return done(null, tokenValue, refreshTokenValue, {
+        'expires_in': Config.current.tokenLife
+      });
     })
     .catch((err)=> {
       return done(err);
@@ -120,7 +122,7 @@ server.exchange(oauth2orize.exchange.refreshToken(function (client, refreshToken
       return token;
     })
     .then((token: any)=> {
-      if(!token)
+      if (!token)
         throw new tokenException();
 
       return db.User.findOne({where: {userId: token.userId}})
@@ -176,10 +178,10 @@ server.exchange(oauth2orize.exchange.refreshToken(function (client, refreshToken
       return done(null, tokenValue, refreshTokenValue, {'expires_in': Config.current.tokenLife});
     })
     .catch((err)=> {
-        if(err.name === 'token') {
-          return;
-        }
-        return done(err);
+      if (err.name === 'token') {
+        return;
+      }
+      return done(err);
     });
 
 

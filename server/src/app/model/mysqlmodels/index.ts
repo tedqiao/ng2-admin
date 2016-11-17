@@ -1,4 +1,3 @@
-
 import * as fs from 'fs';
 import * as path from 'path';
 import * as Sequelize from 'sequelize';
@@ -13,7 +12,7 @@ interface DbConnection {
   User: Sequelize.Model<User.UserInstance,User.UserAttributes>;
   Oauth2Client: Sequelize.Model<Oauth2Client.Oauth2ClientInstance,Oauth2Client.Oauth2ClientAttributes>;
   Oauth2AccessToken: Sequelize.Model<Oauth2AccessToken.Oauth2AccessTokenInstance,Oauth2AccessToken.Oauth2AccessTokenAttributes>;
-  Oauth2RefreshToken:Sequelize.Model<Oauth2RefreshToken.Oauth2RefreshTokenInstance,Oauth2RefreshToken.Oauth2RefreshTokenAttributes>;
+  Oauth2RefreshToken: Sequelize.Model<Oauth2RefreshToken.Oauth2RefreshTokenInstance,Oauth2RefreshToken.Oauth2RefreshTokenAttributes>;
   sequelize: Sequelize.Sequelize;
   Sequelize: Sequelize.Sequelize ;
 }
@@ -29,7 +28,7 @@ var sequelize = new Sequelize(
   {
     dialect: Config.current.mysql.dialect,
     host: Config.current.mysql.host,
-    logging:Config.current.mysql.logging
+    logging: Config.current.mysql.logging
   }
 );
 
@@ -37,7 +36,7 @@ var basename = path.basename(module.filename);
 fs
   .readdirSync(__dirname)
   .filter(function (file) {
-    console.log("load:"+file);
+    console.log("load:" + file);
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(function (file) {

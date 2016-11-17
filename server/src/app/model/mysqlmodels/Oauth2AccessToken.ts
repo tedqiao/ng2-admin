@@ -21,11 +21,11 @@ export default function defineOauth2AccessToken(sequelize: Sequelize.Sequelize, 
   var AccessToken = sequelize.define<Oauth2AccessTokenInstance,Oauth2AccessTokenInstance>('Oauth2AccessToken', {
     userId: {
       type: DataTypes.INTEGER,
-      primaryKey:true
+      primaryKey: true
     },
     clientId: {
       type: DataTypes.STRING,
-      primaryKey:true
+      primaryKey: true
     },
     token: {
       type: DataTypes.STRING

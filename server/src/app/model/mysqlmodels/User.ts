@@ -5,6 +5,9 @@ export interface UserAttributes {
   email: string;
   username: string;
   password: string;
+  google: string;
+  facebook: string;
+  wechat: string;
 }
 
 export interface UserInstance extends Sequelize.Instance<UserAttributes> {
@@ -17,6 +20,9 @@ export interface UserInstance extends Sequelize.Instance<UserAttributes> {
   username: string;
   password: string;
   salt: string;
+  google: string;
+  facebook: string;
+  wechat: string;
   checkPassword: Function;
 }
 
@@ -52,6 +58,16 @@ export default function defineUser(sequelize: Sequelize.Sequelize, DataTypes) {
     salt: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    google: {
+      type: DataTypes.STRING
+    },
+    facebook: {
+      type: DataTypes.STRING
+    },
+    wechat: {
+      type: DataTypes.STRING,
+
     }
   }, {
     classMethods: {

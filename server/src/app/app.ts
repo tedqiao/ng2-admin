@@ -6,21 +6,21 @@ import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import * as oauth2 from './modules/oauth2/oauth2';
 import * as passport from 'passport';
+import googleAuth from './modules/social/auth.google';
 
 import {Config} from './config/envirment/config';
 
 
 var app = express();
 
-
+(mongoose as any).Promise = global.Promise;
 mongoose.connect(Config.current.mongoConnectionString, ()=> {
-
 });
 
 app.set('port', Config.current.port);
 
 //noinspection TypeScriptValidateTypes
-app.use(express.static(path.resolve(__dirname, '../client')));
+app.use(express.static(path.resolve(__dirname, '../../client')));
 //noinspection TypeScriptValidateTypes
 app.use(express.static(path.resolve(__dirname, '../../node_modules')));
 //noinspection TypeScriptValidateTypes
@@ -39,6 +39,8 @@ app.use(passport.initialize());
 
 //noinspection TypeScriptValidateTypes
 app.post('/oauth/token', oauth2);
+
+app.post('/oauth/token/:social', googleAuth);
 
 
 // custom callback
