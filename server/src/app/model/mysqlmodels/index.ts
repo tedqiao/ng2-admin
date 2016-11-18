@@ -30,17 +30,7 @@ var sequelize = new Sequelize(
     host: Config.current.mysql.host,
     logging: Config.current.mysql.logging,
     define: {
-      freezeTableName: false,
-      syncOnAssociation: true,
       charset: 'utf8mb4',
-      classMethods: {
-        method1: function () {
-        }
-      },
-      instanceMethods: {
-        method2: function () {
-        }
-      },
       timestamps: true
     },
   }
