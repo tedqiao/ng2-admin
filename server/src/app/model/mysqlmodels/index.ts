@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as Sequelize from 'sequelize';
 import {Config} from './../../config/envirment/config';
 
-import * as User from './user';
+import * as User from './User';
 import * as Oauth2Client from './Oauth2Client';
 import * as Oauth2AccessToken from "./Oauth2AccessToken";
 import * as Oauth2RefreshToken from "./Oauth2RefreshToken";

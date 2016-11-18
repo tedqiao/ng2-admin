@@ -1,6 +1,6 @@
 FROM node:latest
 
-RUN git clone https://github.com/akveo/ng2-admin.git /var/www \
+RUN git clone https://github.com/tedqiao/ng2-admin.git /var/www \
     && cd /var/www \
     && npm install --global rimraf \
     && npm run clean \
@@ -11,4 +11,4 @@ RUN git clone https://github.com/akveo/ng2-admin.git /var/www \
 EXPOSE 8080
 
 WORKDIR /var/www
-ENTRYPOINT ["npm", "run", "server:prod"]
+ENTRYPOINT ["npm", "run", "build:project"]
