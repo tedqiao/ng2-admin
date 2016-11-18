@@ -44,22 +44,28 @@ export class Login {
     }
   }
 
-  loginWithGoogle(social) {
-    this.auth.authenticate(social)
+  loginWithProvider(provider) {
+    this.auth.authenticate(provider)
       .map((res)=> {
         console.log(res);
         return res;
       })
-      .flatMap((res: any)=> {
-        return this._exchangeCode(social, res.code);
+      .flatMap((data: any)=> {
+        return this._exchangeCode(provider, data.code);
       })
-      .subscribe((res)=> {
-        console.log(res);
-      });
+      .subscribe((data)=> {
+          console.log(data);
+        },
+        (err)=> {
+          console.log(err);
+        },
+        ()=> {
+          console.log('completed');
+        });
   }
 
-  private _exchangeCode(social, code) {
-    return this._http.post('/oauth/token/' + social, {code: code,clientId:"mobileV1"}).map(res=>res.json());
+  private _exchangeCode(provider, code) {
+    return this._http.post('/oauth/token/' + provider, {code: code, clientId: "mobileV1"}).map(res=>res.json());
   }
 
 }

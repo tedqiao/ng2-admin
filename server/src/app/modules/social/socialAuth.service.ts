@@ -12,21 +12,22 @@ interface params {
 
 export class socialAuthService {
   accessTokenUrl: string;
-  peopleApiUrl: string;
+  userApiUrl: string;
   params: params;
 
-  constructor(code, social) {
+  constructor(code, provider) {
     this.params = {
       code: code,
-      client_id: config[social].client_id,
-      client_secret: config[social].client_secret,
-      redirect_uri: config[social].redirect_uri,
+      client_id: config[provider].client_id,
+      client_secret: config[provider].client_secret,
+      redirect_uri: config[provider].redirect_uri,
       grant_type: "authorization_code"
     }
 
-    this.accessTokenUrl = config[social].accessTokenUrl;
-    this.peopleApiUrl = config[social].peopleApiUrl;
+    this.accessTokenUrl = config[provider].accessTokenUrl;
+    this.userApiUrl = config[provider].userApiUrl;
 
+    console.log(code);
   }
 
   getUser() {
@@ -42,19 +43,17 @@ export class socialAuthService {
     };
 
     return rp(Options)
-      .then(token=> {
-        return this._getDetail(token);
-      })
+      .then(this._getDetail)
       .catch(err=> {
         console.log(err);
       })
   }
 
-  private _getDetail(token) {
+  private _getDetail = (token)=>{
     var accessToken = token.access_token;
     var headers = {Authorization: 'Bearer ' + accessToken};
     var options = {
-      uri: this.peopleApiUrl,
+      uri: this.userApiUrl,
       headers: headers,
       json: true
     };

@@ -28,12 +28,10 @@ export class socialService {
       .then(found=> {
         if (!found)
           return this.User.create({
-            username: user.username,
-            email: user.email,
             google: user.googleId,
-            password: "123",
             facebook: user.facebook,
-            wechat: user.wechat
+            wechat: user.wechat,
+            displayname:user.displayname
           });
         else
           return found;

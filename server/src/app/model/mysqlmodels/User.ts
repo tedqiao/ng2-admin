@@ -5,9 +5,10 @@ export interface UserAttributes {
   email: string;
   username: string;
   password: string;
-  google: string;
-  facebook: string;
-  wechat: string;
+  google?: string;
+  facebook?: string;
+  wechat?: string;
+  displayname?:string;
 }
 
 export interface UserInstance extends Sequelize.Instance<UserAttributes> {
@@ -23,6 +24,7 @@ export interface UserInstance extends Sequelize.Instance<UserAttributes> {
   google: string;
   facebook: string;
   wechat: string;
+  displayname:string;
   checkPassword: Function;
 }
 
@@ -37,7 +39,6 @@ export default function defineUser(sequelize: Sequelize.Sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
       set: function (val) {
         this.setDataValue('email', val.toLowerCase());
       }
@@ -45,11 +46,9 @@ export default function defineUser(sequelize: Sequelize.Sequelize, DataTypes) {
     username: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
       set: function (password) {
         this.setDataValue('salt', crypto.randomBytes(32).toString('hex'));
         this.setDataValue('password', this.encryptPassword(password));
@@ -57,7 +56,9 @@ export default function defineUser(sequelize: Sequelize.Sequelize, DataTypes) {
     },
     salt: {
       type: DataTypes.STRING,
-      allowNull: false,
+    },
+    displayname:{
+      type: DataTypes.STRING,
     },
     google: {
       type: DataTypes.STRING

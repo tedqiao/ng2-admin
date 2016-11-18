@@ -6,7 +6,7 @@ import * as mongoose from 'mongoose';
 import * as morgan from 'morgan';
 import * as oauth2 from './modules/oauth2/oauth2';
 import * as passport from 'passport';
-import googleAuth from './modules/social/auth.google';
+import auths from './modules/social/auths';
 
 import {Config} from './config/envirment/config';
 
@@ -40,7 +40,12 @@ app.use(passport.initialize());
 //noinspection TypeScriptValidateTypes
 app.post('/oauth/token', oauth2);
 
-app.post('/oauth/token/:social', googleAuth);
+app.post('/oauth/token/:social', auths);
+
+app.post('/auth/facebook', function(req,res){
+  console.log("body:"+req.body);
+  res.json(req.body);
+});
 
 
 // custom callback
