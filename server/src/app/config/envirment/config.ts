@@ -39,7 +39,7 @@ export class Config {
       username: "root",
       password: "qiaojian123",
       database: "ng2admin",
-      host: "127.0.0.1",
+      host: "mysql",
       dialect: "mysql",
       logging: false
     },
