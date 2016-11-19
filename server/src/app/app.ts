@@ -15,6 +15,7 @@ var app = express();
 
 (mongoose as any).Promise = global.Promise;
 mongoose.connect(Config.current.mongoConnectionString, ()=> {
+  console.log("connected");
 });
 
 app.set('port', Config.current.port);

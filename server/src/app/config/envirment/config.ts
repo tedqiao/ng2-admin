@@ -22,7 +22,7 @@ export class Config {
     mysql: {
       username: "root",
       password: "qiaojian123",
-      database: "ng-admin",
+      database: "ng2admin",
       host: "127.0.0.1",
       dialect: "mysql",
       logging: true
@@ -38,7 +38,7 @@ export class Config {
     mysql: {
       username: "root",
       password: "qiaojian123",
-      database: "ng-admin",
+      database: "ng2admin",
       host: "127.0.0.1",
       dialect: "mysql",
       logging: false
