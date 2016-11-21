@@ -10,4 +10,4 @@ RUN git clone https://github.com/tedqiao/ng2-admin.git /var/www \
 EXPOSE 3000
 
 WORKDIR /var/www
-ENTRYPOINT ["npm", "run", "build:project"]
+

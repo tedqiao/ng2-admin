@@ -1,6 +1,7 @@
 var facebookfields = ['id', 'email', 'first_name', 'last_name', 'link', 'name'];
 
 
+
 export default {
   google: {
     accessTokenUrl: 'https://accounts.google.com/o/oauth2/token',
@@ -16,4 +17,5 @@ export default {
     client_id: "1129165283812467",
     client_secret: "1f5c65188020e35eecd139eecfa58ec2"
   }
+
 }
