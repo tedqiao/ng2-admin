@@ -14,9 +14,11 @@ import {Config} from './config/envirment/config';
 var app = express();
 
 (mongoose as any).Promise = global.Promise;
-mongoose.connect(Config.current.mongoConnectionString, (err)=> {
-  console.log(err);
-});
+var db = mongoose.connection;
+mongoose.connect(Config.current.mongoConnectionString);
+db.on('error', console.error.bind(console, 'connection error:'));
+
+
 
 app.set('port', Config.current.port);
 
@@ -43,8 +45,8 @@ app.post('/oauth/token', oauth2);
 
 app.post('/oauth/token/:social', auths);
 
-app.post('/auth/facebook', function(req,res){
-  console.log("body:"+req.body);
+app.post('/auth/facebook', function (req, res) {
+  console.log("body:" + req.body);
   res.json(req.body);
 });
 
