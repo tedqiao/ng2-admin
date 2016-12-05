@@ -17,7 +17,7 @@ export class Config {
     app: {
       name: ''
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PcORT || 3000,
     mongoConnectionString: 'mongodb://localhost/db',
     mysql: {
       username: "root",
@@ -34,7 +34,7 @@ export class Config {
       name: ''
     },
     port: process.env.PORT || 3000,
-    mongoConnectionString: 'mongodb://localhost/db',
+    mongoConnectionString: 'mongodb://mongodb/db',
     mysql: {
       username: "root",
       password: "qiaojian123",

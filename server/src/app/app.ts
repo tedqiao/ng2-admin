@@ -14,8 +14,8 @@ import {Config} from './config/envirment/config';
 var app = express();
 
 (mongoose as any).Promise = global.Promise;
-mongoose.connect(Config.current.mongoConnectionString, ()=> {
-  console.log("connected");
+mongoose.connect(Config.current.mongoConnectionString, (err)=> {
+  console.log(err);
 });
 
 app.set('port', Config.current.port);
